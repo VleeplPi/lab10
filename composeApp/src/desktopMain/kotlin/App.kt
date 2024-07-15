@@ -36,11 +36,13 @@ fun readCsv(file: File): List<List<String>> {
 
 fun prepareDataFromCsvForChart(data: List<List<String>>): ChartDataItem {
     var nameDataLabel: String = data[0][0]
-    val yAxis: List<Double> =List<Double>(data.size-1){0.0}
-    val xAxis: List<String> =List<String>(data.size-1){""}
+    val yAxis = mutableListOf<Double>()
+    val xAxis = mutableListOf<String>()
     for (i in 1..<data.size){
-        xAxis.plus(data[i][2])
-        yAxis.plus(data[i][4].toFloat())
+
+        xAxis.add(data[i][2])
+        yAxis.add(data[i][4].toDouble())
+        println("${xAxis[i-1]}\t${yAxis[i-1]}")
     }
     return ChartDataItem(nameDataLabel, yAxis, xAxis)
 
